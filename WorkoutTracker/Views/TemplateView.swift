@@ -48,8 +48,7 @@ struct TemplateView: View {
             }
             
             .sheet(isPresented: $showingSheet) {
-                Text("WorkoutAddView")
-//                WorkoutAddView()
+                WorkoutAddView()
             }
         }
     }

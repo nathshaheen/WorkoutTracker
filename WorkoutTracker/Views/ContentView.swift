@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    let testWorkouts: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
+    
     var body: some View {
         TabView {
             Tab("Workouts", systemImage: "figure.run.circle.fill") {
@@ -15,9 +17,8 @@ struct ContentView: View {
 //                WorkoutView()
             }
             
-            Tab("Templates", systemImage: "list.bullet") {
-                Text("TemplateView")
-//                TemplateView()
+            Tab("Templates", systemImage: "line.3.horizontal") {
+                TemplateView(workouts: testWorkouts)
             }
         }
     }
