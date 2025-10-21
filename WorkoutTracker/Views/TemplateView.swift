@@ -14,12 +14,14 @@ struct TemplateView: View {
         
     var body: some View {
         NavigationStack {
-            List() {
+            List {
                 ForEach(workouts) { workout in
                     GroupBox {
-                        HStack {
-                            Text(workout.name)
-                            Spacer()
+                        NavigationLink(destination: WorkoutTemplateView(workout: workout)) {
+                            HStack {
+                                Text(workout.name)
+                                Spacer()
+                            }
                         }
                         .frame(maxWidth: .infinity)
                     }
@@ -58,7 +60,7 @@ struct TemplateView: View {
 }
 
 #Preview {
-    var testWorkouts = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
+    let testWorkouts: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
     
     TemplateView(workouts: testWorkouts)
 }
