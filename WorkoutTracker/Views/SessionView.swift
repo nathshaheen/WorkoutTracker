@@ -17,8 +17,13 @@ struct SessionView: View {
             List {
                 ForEach(workouts) { workout in
                     GroupBox {
-                        Text("WorkoutSessionView")
-                            .frame(maxWidth: .infinity)
+                        NavigationLink(destination: WorkoutSessionView(workout: workout)) {
+                            HStack {
+                                Text(workout.name)
+                                Spacer()
+                            }
+                        }
+                        .frame(maxWidth: .infinity)
                     }
                 }
                 .onDelete(perform: delete)
