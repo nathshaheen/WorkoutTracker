@@ -10,8 +10,20 @@ import SwiftUI
 struct WorkoutTemplateView: View {
     var workout: WorkoutTemplate
     
-    @State private var showingSheet: Bool = false
-        
+    enum Sheet: Identifiable {
+        case addExerciseTemplate
+        case addSetTemplate
+
+        var id: String {
+            switch self {
+                case .addExerciseTemplate: return "addExerciseTemplate"
+                case .addSetTemplate: return "addSetTemplate"
+            }
+        }
+    }
+
+    @State private var showingSheet: Sheet?
+            
     var body: some View {
         NavigationStack {
             List {
@@ -43,7 +55,7 @@ struct WorkoutTemplateView: View {
                         
                         GroupBox {
                             Button {
-                                
+                                showingSheet = .addSetTemplate
                             } label: {
                                 Text("Add a New Set")
                             }
@@ -76,15 +88,20 @@ struct WorkoutTemplateView: View {
                 ToolbarSpacer(placement: .bottomBar)
                 ToolbarItem(placement: .bottomBar) {
                     Button {
-                        showingSheet = true
+                        showingSheet = .addExerciseTemplate
                     } label: {
                         Label("Add", systemImage: "plus").labelStyle(.iconOnly)
                     }
                 }
             }
             
-            .sheet(isPresented: $showingSheet) {
-                ExerciseTemplateAddView()
+            .sheet(item: $showingSheet) { sheet in
+                switch sheet {
+                    case .addExerciseTemplate:
+                        ExerciseTemplateAddView()
+                    case .addSetTemplate:
+                        SetTemplateAddView()
+                }
             }
         }
     }
