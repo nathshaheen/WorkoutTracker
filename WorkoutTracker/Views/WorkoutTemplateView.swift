@@ -84,7 +84,7 @@ struct WorkoutTemplateView: View {
             }
             
             .sheet(isPresented: $showingSheet) {
-                ExerciseAddView()
+                ExerciseTemplateAddView()
             }
         }
     }

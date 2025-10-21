@@ -1,5 +1,5 @@
 //
-//  ExerciseAddView.swift
+//  WorkoutAddView.swift
 //  WorkoutTracker
 //
 //  Created by Nathan Shaheen on 21/10/2025.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ExerciseAddView: View {
+struct WorkoutTemplateAddView: View {
     @State private var name: String = ""
     
     var body: some View {
@@ -16,7 +16,7 @@ struct ExerciseAddView: View {
                 TextField("Name", text: $name)
             }
             
-            .navigationTitle("Add a New Exercise")
+            .navigationTitle("Add a New Workout")
             
             .toolbar {
                 ToolbarItem() {
@@ -32,5 +32,5 @@ struct ExerciseAddView: View {
 }
 
 #Preview {
-    ExerciseAddView()
+    WorkoutTemplateAddView()
 }
