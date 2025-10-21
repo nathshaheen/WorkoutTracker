@@ -8,17 +8,18 @@
 import SwiftUI
 
 struct ContentView: View {
-    let testWorkouts: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
+    let testSessionWorkouts: [WorkoutSession] = [WorkoutSession(name: "Workout 1", date: Date(), exercises: []), WorkoutSession(name: "Workout 2", date: Date(), exercises: []), WorkoutSession(name: "Workout 3", date: Date(), exercises: [])]
+    
+    let testTemplateWorkouts: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
     
     var body: some View {
         TabView {
-            Tab("Workouts", systemImage: "figure.run.circle.fill") {
-                Text("WorkoutView")
-//                WorkoutView()
+            Tab("Sessions", systemImage: "figure.run.circle.fill") {
+                SessionView(workouts: testSessionWorkouts)
             }
             
             Tab("Templates", systemImage: "line.3.horizontal") {
-                TemplateView(workouts: testWorkouts)
+                TemplateView(workouts: testTemplateWorkouts)
             }
         }
     }
