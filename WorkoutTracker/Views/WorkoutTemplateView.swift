@@ -98,7 +98,7 @@ struct WorkoutTemplateView: View {
             .sheet(item: $showingSheet) { sheet in
                 switch sheet {
                     case .addExerciseTemplate:
-                        ExerciseTemplateAddView()
+                        ExerciseTemplateAddView(workoutTemplate: workout)
                     case .addSetTemplate:
                         SetTemplateAddView()
                 }

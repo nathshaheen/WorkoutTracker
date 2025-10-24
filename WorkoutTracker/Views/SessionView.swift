@@ -8,14 +8,16 @@
 import SwiftUI
 
 struct SessionView: View {
-    var workouts: [WorkoutSession]
+    var sessions: [WorkoutSession]
+    
+    var templates: [WorkoutTemplate]
     
     @State private var showingSheet: Bool = false
         
     var body: some View {
         NavigationStack {
             List {
-                ForEach(workouts) { workout in
+                ForEach(sessions) { workout in
                     GroupBox {
                         NavigationLink(destination: WorkoutSessionView(workout: workout)) {
                             HStack {
@@ -47,7 +49,7 @@ struct SessionView: View {
             }
             
             .sheet(isPresented: $showingSheet) {
-//                WorkoutSessionAddView()
+                WorkoutSessionAddView(templates: templates)
             }
         }
     }
@@ -58,7 +60,9 @@ struct SessionView: View {
 }
 
 #Preview {
-    let testWorkouts: [WorkoutSession] = [WorkoutSession(name: "Workout 1", date: Date(), exercises: []), WorkoutSession(name: "Workout 2", date: Date(), exercises: []), WorkoutSession(name: "Workout 3", date: Date(), exercises: [])]
+    let testTemplates: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
     
-    SessionView(workouts: testWorkouts)
+    let testSessions: [WorkoutSession] = [WorkoutSession(name: "Workout 1", date: Date(), exercises: []), WorkoutSession(name: "Workout 2", date: Date(), exercises: []), WorkoutSession(name: "Workout 3", date: Date(), exercises: [])]
+    
+    SessionView(sessions: testSessions, templates: testTemplates)
 }

@@ -5,17 +5,20 @@
 //  Created by Nathan Shaheen on 20/10/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct TemplateView: View {
-    var workouts: [WorkoutTemplate]
+    @Environment(\.modelContext) var context
+    
+    var templates: [WorkoutTemplate]
     
     @State private var showingSheet: Bool = false
         
     var body: some View {
         NavigationStack {
             List {
-                ForEach(workouts) { workout in
+                ForEach(templates) { workout in
                     GroupBox {
                         NavigationLink(destination: WorkoutTemplateView(workout: workout)) {
                             HStack {
@@ -54,12 +57,20 @@ struct TemplateView: View {
     }
     
     private func delete(at offsets: IndexSet) {
-
+        for index in offsets {
+            context.delete(templates[index])
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save: \(error.localizedDescription)")
+        }
     }
 }
 
 #Preview {
-    let testWorkouts: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
+    let testTemplates: [WorkoutTemplate] = [WorkoutTemplate(name: "Workout 1", exercises: []), WorkoutTemplate(name: "Workout 2", exercises: []), WorkoutTemplate(name: "Workout 3", exercises: [])]
     
-    TemplateView(workouts: testWorkouts)
+    TemplateView(templates: testTemplates)
 }
