@@ -28,53 +28,7 @@ struct WorkoutSessionView: View {
         NavigationStack {
             List {
                 ForEach(workout.exercises) { exercise in
-                    Section {
-                        HStack {
-                            Text("Weight")
-                            Spacer()
-                            Text("Reps")
-                            Spacer()
-                            Text("Completed")
-                        }
-                        .deleteDisabled(true)
-                        
-                        ForEach(exercise.sets) { set in
-                            GroupBox {
-                                HStack {
-                                    Text(String(format: "%.2f", set.weight))
-                                    Spacer()
-                                    Text(String(set.reps))
-                                    Spacer()
-                                    Text(String(set.completed))
-                                }
-                            }
-                        }
-                        .onDelete { offsets in
-                            
-                        }
-                        
-                        GroupBox {
-                            Button {
-                                showingSheet = .addSetSession
-                            } label: {
-                                Text("Add a New Set")
-                            }
-                            .frame(maxWidth: .infinity)
-                        }
-                        .deleteDisabled(true)
-                    } header: {
-                        VStack {
-                            HStack {
-                                Text(exercise.name)
-                                Spacer()
-                                Button {
-                                    
-                                } label: {
-                                    Label("Options", systemImage: "line.3.horizontal").labelStyle(.iconOnly)
-                                }
-                            }
-                        }
-                    }
+                    ExerciseSessionView(exercise: exercise)
                 }
                 .onDelete(perform: delete)
                 .listRowSeparator(.hidden)
