@@ -12,12 +12,10 @@ struct WorkoutSessionView: View {
     
     enum Sheet: Identifiable {
         case addExerciseSession
-        case addSetSession
 
         var id: String {
             switch self {
                 case .addExerciseSession: return "addExerciseSession"
-                case .addSetSession: return "addSetSession"
             }
         }
     }
@@ -50,12 +48,10 @@ struct WorkoutSessionView: View {
             }
             
             .sheet(item: $showingSheet) { sheet in
-//                switch sheet {
-//                    case .addExerciseSession:
-//                        ExerciseTemplateAddView()
-//                    case .addSetSession:
-//                        SetTemplateAddView()
-//                }
+                switch sheet {
+                    case .addExerciseSession:
+                        ExerciseSessionAddView(workoutSession: workout)
+                }
             }
         }
     }

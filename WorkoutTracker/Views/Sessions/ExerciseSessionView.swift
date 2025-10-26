@@ -75,10 +75,10 @@ struct ExerciseSessionView: View {
             }
             
             .sheet(item: $showingSheet) { sheet in
-//                switch sheet {
-//                    case .addSetSession:
-//                        SetSessionAddView(exerciseSession: exercise)
-//                }
+                switch sheet {
+                    case .addSetSession:
+                        SetSessionAddView(exerciseSession: exercise)
+                }
             }
         }
     }
