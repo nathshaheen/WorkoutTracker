@@ -5,9 +5,12 @@
 //  Created by Nathan Shaheen on 25/10/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct ExerciseSessionView: View {
+    @Environment(\.modelContext) var context
+    
     @State var exercise: ExerciseSession
     
     @State private var showingSheet: Sheet?
@@ -48,9 +51,7 @@ struct ExerciseSessionView: View {
                     }
                 }
             }
-            .onDelete { offsets in
-                
-            }
+            .onDelete(perform: deleteSet)
             
             GroupBox {
                 Button {
@@ -67,7 +68,7 @@ struct ExerciseSessionView: View {
                     Text(exercise.name)
                     Spacer()
                     Button {
-                        
+                        deleteExercise()
                     } label: {
                         Label("Options", systemImage: "line.3.horizontal").labelStyle(.iconOnly)
                     }
@@ -82,4 +83,30 @@ struct ExerciseSessionView: View {
             }
         }
     }
+    
+    private func deleteExercise() {
+        context.delete(exercise)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to delete: \(error.localizedDescription)")
+        }
+    }
+
+    private func deleteSet(at offsets: IndexSet) {
+        exercise.sets.remove(atOffsets: offsets)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to delete: \(error.localizedDescription)")
+        }
+    }
+}
+
+#Preview {
+    let testExerciseSession: ExerciseSession = ExerciseSession(name: "Test Exercise Session", sets: [])
+    
+    ExerciseSessionView(exercise: testExerciseSession)
 }

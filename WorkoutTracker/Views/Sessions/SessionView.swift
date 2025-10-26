@@ -5,9 +5,12 @@
 //  Created by Nathan Shaheen on 21/10/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct SessionView: View {
+    @Environment(\.modelContext) var context
+    
     var sessions: [WorkoutSession]
     
     var templates: [WorkoutTemplate]
@@ -55,7 +58,15 @@ struct SessionView: View {
     }
     
     private func delete(at offsets: IndexSet) {
-
+        for index in offsets {
+            context.delete(sessions[index])
+        }
+        
+        do {
+            try context.save()
+        } catch {
+            print("Failed to save: \(error.localizedDescription)")
+        }
     }
 }
 

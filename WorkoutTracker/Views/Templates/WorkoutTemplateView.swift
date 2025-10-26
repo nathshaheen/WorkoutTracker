@@ -28,7 +28,6 @@ struct WorkoutTemplateView: View {
                 ForEach(workout.exercises) { exercise in
                     ExerciseTemplateView(exercise: exercise)
                 }
-                .onDelete(perform: delete)
                 .listRowSeparator(.hidden)
             }
             .navigationTitle(workout.name)
